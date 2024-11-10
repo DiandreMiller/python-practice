@@ -1,3 +1,5 @@
+from typing import List
+
 class Solution:
     def getKth(self, lo: int, hi: int, k: int) -> int:
 
@@ -57,4 +59,69 @@ class Solution:
                 count -= 1
 
         return ''.join(WORD_STACK)
+    
+# 1752. Check if Array Is Sorted and Rotated
+    
+
+# Given an array nums, return true if the array was originally sorted in non-decreasing order, then rotated some number of positions (including zero). Otherwise, return false.
+
+# There may be duplicates in the original array.
+
+# Note: An array A rotated by x positions results in an array B of the same length such that A[i] == B[(i+x) % A.length], where % is the modulo operation.
+
+ 
+
+# Example 1:
+
+# Input: nums = [3,4,5,1,2]
+# Output: true
+# Explanation: [1,2,3,4,5] is the original sorted array.
+# You can rotate the array by x = 3 positions to begin on the the element of value 3: [3,4,5,1,2].
+# Example 2:
+
+# Input: nums = [2,1,3,4]
+# Output: false
+# Explanation: There is no sorted array once rotated that can make nums.
+# Example 3:
+
+# Input: nums = [1,2,3]
+# Output: true
+# Explanation: [1,2,3] is the original sorted array.
+# You can rotate the array by x = 0 positions (i.e. no rotation) to make nums.
+
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+
+        count_drop = 0
+
+        for i in range(len(nums)):
+            current = nums[i]
+            next = nums[(i + 1) % len(nums)]
+
+            if(current > next):
+                count_drop += 1
+                if count_drop > 1:
+                    return False
+        
+        return count_drop <= 1
+
+solution = Solution()
+nums = [3,4,5,1,2] 
+nums1 = [2,1,3,4]
+nums2 = [1,2,3]
+nums3 = [3,4,4,5,1,2]
+nums4 = [3,2,1,4,5]
+nums5 = [11,11,1,20]
+result = solution.check(nums)
+result1 = solution.check(nums1)
+result2 = solution.check(nums2)
+result3 = solution.check(nums3)
+result4 = solution.check(nums4)
+result5 = solution.check(nums5)
+print(result)  
+print(result1)
+print(result2)
+print(result3)
+print(result4)
+print(result5)
 
